@@ -12,6 +12,12 @@ from utils.timefeatures import time_features
 import warnings
 warnings.filterwarnings('ignore')
 
+import datetime
+
+def get_day(x):
+    dt = datetime.datetime.strptime(" ",json(x.split()[:1]), '%Y-%m-%d %H:%M:%S')
+    return dt
+
 class Dataset_ETT_hour(Dataset):
     def __init__(self, root_path, flag='train', size=None, 
                  features='S', data_path='ETTh1.csv', 
@@ -219,6 +225,13 @@ class Dataset_Custom(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
+        df_raw["TimeReceivedTimestamp_per_min"] = df_raw["TimeReceivedTimestamp_per_min"].map(get_day)
+        df_raw = df_raw.sort_values("TimeReceivedTimestamp_per_min")
+        dic = {
+            "TimeReceivedTimestamp_per_min":"date"
+        }
+        df_raw.rename(colums=dic, inplace=True)
+
         '''
         df_raw.columns: ['date', ...(other features), target feature]
         '''
@@ -316,6 +329,13 @@ class Dataset_Pred(Dataset):
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
+
+        df_raw["TimeReceivedTimestamp_per_min"] = df_raw["TimeReceivedTimestamp_per_min"].map(get_day)
+        df_raw = df_raw.sort_values("TimeReceivedTimestamp_per_min")
+        dic = {
+            "TimeReceivedTimestamp_per_min": "date"
+        }
+        df_raw.rename(colums=dic, inplace=True)
         '''
         df_raw.columns: ['date', ...(other features), target feature]
         '''
