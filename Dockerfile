@@ -8,16 +8,14 @@ RUN apt-get update -y  && apt-get upgrade -y  && apt-get install wget curl git -
 
 
 RUN apt-get update && apt-get install -y \
-	python3-opencv ca-certificates python3.7-dev git wget sudo python3.7-distutils python3-pip cmake git wget sudo ninja-build && \
+	python3-opencv ca-certificates python3.8-dev git wget sudo python3.8-distutils python3-pip cmake git wget sudo ninja-build && \
   rm -rf /var/lib/apt/lists/*
 
 #python install
-RUN python3.7 -m pip install --upgrade pip
-RUN python3.7 -m pip install numpy
-RUN ln -sv /usr/bin/python3.7 /usr/bin/python && \
+RUN python3.8 -m pip install --upgrade pip
+RUN python3.8 -m pip install numpy
+RUN ln -sv /usr/bin/python3.8 /usr/bin/python && \
     python -V
-
-RUN git clone https://github.com/str-saito/Informer2020.git
 
 RUN pip --no-cache-dir install \
     absl-py==0.10.0 \
@@ -61,7 +59,7 @@ RUN pip --no-cache-dir install \
     pygments==2.6.1 \
     pyparsing==2.4.6 \
     pytz==2019.3 \
-    pyyaml==5.3.1 \
+    pyyaml \
     pyzmq==19.0.0 \
     requests==2.23.0 \
     requests-oauthlib==1.3.0 \
@@ -85,3 +83,6 @@ RUN pip --no-cache-dir install \
     Polygon3 \
     shapely \
     graphviz
+
+ADD data /data/
+RUN git clone https://github.com/str-saito/Informer2020.git

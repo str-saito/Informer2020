@@ -192,7 +192,7 @@ class Dataset_ETT_minute(Dataset):
 
 
 class Dataset_Custom(Dataset):
-    def __init__(self, root_path, df_path, flag='train', size=None,
+    def __init__(self, root_path, df_input, flag='train', size=None,
                  features='S', data_path='ETTh1.csv', 
                  target='OT', scale=True, inverse=False, timeenc=0, freq='h', cols=None):
         # size [seq_len, label_len, pred_len]
@@ -219,12 +219,12 @@ class Dataset_Custom(Dataset):
         self.cols=cols
         self.root_path = root_path
         self.data_path = data_path
-        self.df_path = df_path
+        self.df_input = df_input
         self.__read_data__()
 
     def __read_data__(self):
         self.scaler = StandardScaler()
-        df_raw = df_path
+        df_raw = df_input
         df_raw["TimeReceivedTimestamp_per_min"] = df_raw["TimeReceivedTimestamp_per_min"].map(get_day)
         df_raw = df_raw.sort_values("TimeReceivedTimestamp_per_min")
         dic = {

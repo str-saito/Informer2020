@@ -50,6 +50,7 @@ class Exp_Informer(Exp_Basic):
                 self.args.output_attention,
                 self.args.distil,
                 self.args.mix,
+                self.args.input_df,
                 self.device
             ).float()
         
@@ -95,6 +96,7 @@ class Exp_Informer(Exp_Basic):
         print(flag, len(data_set))
         data_loader = DataLoader(
             data_set,
+            df_input=df_input,
             batch_size=batch_size,
             shuffle=shuffle_flag,
             num_workers=args.num_workers,
