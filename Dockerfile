@@ -86,3 +86,4 @@ RUN pip --no-cache-dir install \
 
 ADD data /data/
 RUN git clone https://github.com/str-saito/Informer2020.git
+WORKDIR /workspace/Informer2020
