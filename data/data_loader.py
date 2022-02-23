@@ -224,7 +224,7 @@ class Dataset_Custom(Dataset):
 
     def __read_data__(self):
         self.scaler = StandardScaler()
-        df_raw = pd.read_csv(input_df, index_col=0)
+        df_raw = input_df
         df_raw["TimeReceivedTimestamp_per_min"] = df_raw["TimeReceivedTimestamp_per_min"].map(get_day)
         df_raw = df_raw.sort_values("TimeReceivedTimestamp_per_min")
         dic = {
@@ -328,7 +328,7 @@ class Dataset_Pred(Dataset):
 
     def __read_data__(self):
         self.scaler = StandardScaler()
-        df_raw = pd.read_csv(input_df, index_col=0)
+        df_raw = input_df
         df_raw["TimeReceivedTimestamp_per_min"] = df_raw["TimeReceivedTimestamp_per_min"].map(get_day)
         df_raw = df_raw.sort_values("TimeReceivedTimestamp_per_min")
         dic = {
