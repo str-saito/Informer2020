@@ -19,6 +19,7 @@ RUN ln -sv /usr/bin/python3.8 /usr/bin/python && \
 
 RUN pip --no-cache-dir install \
     absl-py==0.10.0 \
+    argparse==1.4.0 \
     backcall==0.1.0 \
     cachetools==4.0.0 \
     chardet==3.0.4 \
@@ -30,6 +31,7 @@ RUN pip --no-cache-dir install \
     future==0.18.2 \
     fvcore==0.1.dev200325 \
     grpcio==1.27.2 \
+    google-cloud-storage==2.5.0 \
     idna==2.9 \
     ipykernel==5.2.0 \
     ipython==7.13.0 \
